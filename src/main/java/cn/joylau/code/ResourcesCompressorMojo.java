@@ -137,13 +137,15 @@ public class ResourcesCompressorMojo extends AbstractMojo {
      * 压缩html文件
      */
     private void compressHTML() {
+        getLog().info("compressHTML...");
         if (null == htmlConfigs || null == htmlConfigs[0].getDir()) {
+            getLog().info("dir is null...");    
             return;
         }
         getLog().info("开始压缩HTML文件...");
         try {
             for (HTMLConfig htmlConfig : htmlConfigs) {
-                List list = findFiles(new File(outDir.getPath() + htmlConfig.getDir()), htmlConfig.getInclude
+                List list = findFiles(new File(htmlConfig.getDir()), htmlConfig.getInclude
                         (), htmlConfig.getExclude(), new ArrayList<>());
                 for (Object file : list) {
                     if (file instanceof File) {
